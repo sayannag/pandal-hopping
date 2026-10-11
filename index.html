@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pujo Parikrama 2026 · Kolkata pandal hopping + food trail planner</title>
+  <meta name="description" content="Every major Kolkata Durga Puja pandal of 2026 on one map, the best food around each one with live Google ratings, and a planner that routes your pandal hopping by distance, queues and Metro timings.">
+  <meta name="theme-color" content="#12070a">
+  <meta property="og:title" content="Pujo Parikrama 2026 — Kolkata pandals + food, perfectly routed">
+  <meta property="og:description" content="116 pandals, 590+ food spots, live Google ratings and a route optimiser for Durga Puja 2026 in Kolkata.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Galada&family=Hind+Siliguri:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap">
+  <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    (function () { try { var t = localStorage.getItem('pp.theme'); if (t) document.documentElement.setAttribute('data-theme', JSON.parse(t)); } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16 16"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19.5 7"/></symbol>
+      <symbol id="i-temple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V11M19 21V11M12 3l9 8H3z"/><path d="M9.5 21v-4.5a2.5 2.5 0 0 1 5 0V21"/></symbol>
+      <symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8.2 19H15a3.2 3.2 0 0 0 0-6.4H9a3.2 3.2 0 0 1 0-6.4h6.8"/></symbol>
+      <symbol id="i-food" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18a9 8 0 0 1-18 0z"/><path d="M8 8c0-1.6 1.2-2 1.2-3.6M12 8c0-1.6 1.2-2 1.2-3.6M16 8c0-1.6 1.2-2 1.2-3.6"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 13.3A8.5 8.5 0 1 1 10.7 3.5a6.6 6.6 0 0 0 9.8 9.8z"/></symbol>
+      <symbol id="i-locate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="12" r="7.8"/><path d="M12 1.5v2.7M12 19.8v2.7M1.5 12h2.7M19.8 12h2.7"/></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 13.3 7.4 4.3M15.7 6.4 8.3 10.7"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4.5A2.5 2.5 0 0 1 2 12.5v-8A2.5 2.5 0 0 1 4.5 2h8A2.5 2.5 0 0 1 15 4.5V5"/></symbol>
+      <symbol id="i-print" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol>
+      <symbol id="i-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7M10 14 21 3M20 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
+      <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M16 6.8l2.8 2.8M18.6 4.2l2 2"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s-7-6.1-7-11.6a7 7 0 0 1 14 0c0 5.5-7 11.6-7 11.6z"/><circle cx="12" cy="9.8" r="2.6"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8 14.3 9.7 22.2 12l-7.9 2.3L12 22.2l-2.3-7.9L1.8 12l7.9-2.3z"/></symbol>
+      <symbol id="i-dir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 22 12 12 22 2 12z"/><path d="M9 13.5V11a1 1 0 0 1 1-1h5M13 8l2 2-2 2"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12a1 1 0 0 1 1 1v18l-3-2-2 2-2-2-2 2-2-2-3 2V3a1 1 0 0 1 1-1z"/><path d="M9 7h6M9 11h6M9 15h4"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.8 3.9 6 3.9 9.5s-1.3 6.7-3.9 9.5c-2.6-2.8-3.9-6-3.9-9.5s1.3-6.7 3.9-9.5z"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip" href="#app">Skip to the planner</a>
+
+  <header class="topbar">
+    <div class="container">
+      <a class="brand" href="#top" aria-label="Pujo Parikrama home">
+        <img class="brand-mark" src="assets/img/logo.svg" alt="" width="38" height="38">
+        <span class="brand-name">Pujo Parikrama<small>পুজো পরিক্রমা · ২০২৬</small></span>
+      </a>
+      <nav class="nav" aria-label="Sections">
+        <a href="#app" data-go="pandals">Pandals</a>
+        <a href="#app" data-go="plan">Planner</a>
+        <a href="#app" data-go="food">Food</a>
+        <a href="#calendar">Dates &amp; Metro</a>
+        <a href="#tips">Tips</a>
+      </nav>
+      <div class="top-actions">
+        <button class="live-pill" id="live-pill" type="button" title="Google ratings settings"><span class="led"></span><span class="txt" id="live-pill-txt">Google ratings</span></button>
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark theme" title="Toggle theme">
+          <svg class="moon"><use href="#i-moon"/></svg><svg class="sun"><use href="#i-sun"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <svg class="lights" id="lights" viewBox="0 0 1440 90" preserveAspectRatio="xMidYMin slice" aria-hidden="true"></svg>
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker"><span class="bn">শারদীয়া ১৪৩৩</span><span class="sep"></span><span>Kolkata</span><span class="sep"></span><span>15 – 21 Oct 2026</span></div>
+            <h1>Thakur dekha.<br><span class="fire">Pet pujo.</span><br><span class="thin">Perfectly routed.</span></h1>
+            <p class="lede">Every big Kolkata pandal of <strong>Pujo 2026</strong> on one map — with the kabiraji, biryani and mishti around each one, <strong>live Google ratings</strong>, and a planner that sequences your night by distance, queues and <strong>Metro timings</strong>.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#app" data-go="plan"><svg width="18" height="18"><use href="#i-spark"/></svg>Plan my pandal hop</a>
+              <a class="btn btn-ghost" href="#app" data-go="pandals"><svg width="18" height="18"><use href="#i-pin"/></svg>Explore the map</a>
+            </div>
+            <div class="stat-row">
+              <div class="stat"><b id="stat-pandals">—</b><span>pandals mapped</span></div>
+              <div class="stat"><b id="stat-themes">—</b><span>2026 themes out</span></div>
+              <div class="stat"><b id="stat-food">—</b><span>food spots</span></div>
+              <div class="stat"><b id="stat-metro">—</b><span>Metro stations</span></div>
+            </div>
+          </div>
+          <div class="arch-wrap" aria-hidden="false">
+            <svg class="arch" id="arch" viewBox="0 0 600 520" role="img" aria-label="Decorative chalchitra arch"></svg>
+            <div class="countdown" id="countdown" aria-live="polite">
+              <div class="label">Counting down</div>
+              <div class="big">Pujo 2026</div>
+              <div class="sub">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+        <div class="days-strip" id="days-strip" aria-label="Puja days 2026"></div>
+      </div>
+      <svg class="kaash" id="kaash" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+    </section>
+
+    <div class="lp-divider" aria-hidden="true"></div>
+
+    <section class="section app-section" id="planner">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow"><svg width="14" height="14"><use href="#i-spark"/></svg>The parikrama planner</div>
+            <h2>Pandals, food &amp; your route <span class="bn-accent">ঠাকুর দেখা</span></h2>
+          </div>
+          <p>Tap any pandal to see what's worth eating within walking distance. Add a few to <b>My plan</b> and let the optimiser order them, slot in food stops and pick walk, Metro or cab for every leg.</p>
+        </div>
+
+        <div class="app" id="app">
+          <aside class="panel" aria-label="Pandals, plan and food">
+            <div class="tabs" role="tablist">
+              <button class="tab" role="tab" id="tab-pandals" data-tab="pandals" aria-controls="view-pandals" aria-selected="true"><svg><use href="#i-temple"/></svg>Pandals</button>
+              <button class="tab" role="tab" id="tab-plan" data-tab="plan" aria-controls="view-plan" aria-selected="false"><svg><use href="#i-route"/></svg>My plan <span class="count" id="plan-count"></span></button>
+              <button class="tab" role="tab" id="tab-food" data-tab="food" aria-controls="view-food" aria-selected="false"><svg><use href="#i-food"/></svg>Food</button>
+            </div>
+            <div class="panel-body" id="panel-body">
+
+              <section class="view active" id="view-pandals" role="tabpanel" aria-labelledby="tab-pandals">
+                <div id="pandal-browse">
+                  <div class="controls">
+                    <div class="search-wrap">
+                      <svg><use href="#i-search"/></svg>
+                      <input class="input" id="pandal-q" type="search" autocomplete="off" placeholder="Search pandals — try “Sreebhumi” or “বাগবাজার”" aria-label="Search pandals">
+                    </div>
+                    <div class="chip-row scroll" id="zone-chips" aria-label="Filter by area"></div>
+                    <div class="chip-row" id="filter-chips" aria-label="Filters"></div>
+                    <div class="row between">
+                      <span class="result-meta" id="pandal-meta"></span>
+                      <div class="row">
+                        <button class="link-btn" id="add-visible" type="button">+ Add shown to plan</button>
+                        <select class="input" id="pandal-sort" aria-label="Sort pandals" style="width:auto;padding:7px 10px;font-size:13px">
+                          <option value="rec">Recommended</option>
+                          <option value="near">Nearest to me</option>
+                          <option value="calm">Calmest first</option>
+                          <option value="az">A – Z</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list" id="pandal-list"></div>
+                  <div class="custom-add"><button class="btn btn-ghost btn-sm btn-block" id="add-custom" type="button"><svg width="16" height="16"><use href="#i-plus"/></svg> Add a pandal that isn't listed</button><p class="fine" style="text-align:center;margin:6px 0 0">Saved only in this browser — it shows up on the map and in your plans.</p></div>
+                </div>
+                <div id="pandal-detail" hidden></div>
+              </section>
+
+              <section class="view" id="view-plan" role="tabpanel" aria-labelledby="tab-plan">
+                <div class="plan-section picks">
+                  <h3>Your pandals <button class="link-btn" id="plan-clear" type="button">Clear all</button></h3>
+                  <div class="sel-list" id="sel-list"></div>
+                  <p class="muted" id="sel-hint" style="font-size:13px;margin:10px 0 0">Tap <b>+</b> on any pandal, or start from a ready-made trail:</p>
+                  <div class="trails" id="trails"></div>
+                </div>
+                <div class="plan-section settings">
+                  <h3>Your night out</h3>
+                  <div class="form-grid">
+                    <label class="field"><span>Day</span><select class="input" id="pl-day"></select></label>
+                    <label class="field"><span>Start time</span><input class="input" type="time" id="pl-time" value="17:00"></label>
+                    <label class="field full"><span>Time you have · <b class="range-out" id="pl-hours-out">6 h</b></span><input type="range" id="pl-hours" min="2" max="14" step="0.5" value="6"></label>
+                    <label class="field"><span>Start from</span><select class="input" id="pl-start"></select></label>
+                    <label class="field"><span>Finish</span>
+                      <select class="input" id="pl-end">
+                        <option value="open">Wherever it ends</option>
+                        <option value="return">Back at the start</option>
+                        <option value="metro">At a Metro station</option>
+                      </select>
+                    </label>
+                    <div class="field full"><span>Getting around</span>
+                      <div class="seg" id="pl-mode" role="group" aria-label="Travel mode">
+                        <button type="button" data-v="smart" aria-pressed="true">Smart mix</button>
+                        <button type="button" data-v="metro" aria-pressed="false">Walk + Metro</button>
+                        <button type="button" data-v="walk" aria-pressed="false">Walk only</button>
+                        <button type="button" data-v="cab" aria-pressed="false">Cab / car</button>
+                      </div>
+                    </div>
+                    <div class="field full"><span>Pace at each pandal</span>
+                      <div class="seg" id="pl-pace" role="group" aria-label="Pace">
+                        <button type="button" data-v="relaxed" aria-pressed="false">Relaxed</button>
+                        <button type="button" data-v="balanced" aria-pressed="true">Balanced</button>
+                        <button type="button" data-v="marathon" aria-pressed="false">Marathon</button>
+                      </div>
+                    </div>
+                    <div class="field full"><span>Food stops</span>
+                      <div class="seg" id="pl-food" role="group" aria-label="Food stops">
+                        <button type="button" data-v="meals" aria-pressed="true">At meal times</button>
+                        <button type="button" data-v="2h" aria-pressed="false">Every 2 hours</button>
+                        <button type="button" data-v="none" aria-pressed="false">No stops</button>
+                      </div>
+                    </div>
+                    <div class="field full"><span>Cravings (optional)</span><div class="chip-row" id="pl-cravings"></div></div>
+                    <label class="check full"><input type="checkbox" id="pl-chains" checked> Skip chain outlets when picking food stops</label>
+                    <label class="check full"><input type="checkbox" id="pl-fill" checked> Add nearby pandals automatically if there's time left</label>
+                    <label class="field full" id="pl-minrating-wrap" hidden><span>Min. Google rating for food stops · <b class="range-out" id="pl-minrating-out">4.0</b></span><input type="range" id="pl-minrating" min="3.5" max="4.6" step="0.1" value="4.0"></label>
+                  </div>
+                </div>
+                <div class="optimise-bar"><button class="btn btn-primary btn-block" id="btn-optimise" type="button"><svg width="18" height="18"><use href="#i-spark"/></svg>Optimise my parikrama</button></div>
+                <div class="plan-section" id="plan-result" hidden></div>
+              </section>
+
+              <section class="view" id="view-food" role="tabpanel" aria-labelledby="tab-food">
+                <div class="controls">
+                  <div class="search-wrap">
+                    <svg><use href="#i-search"/></svg>
+                    <input class="input" id="food-q" type="search" autocomplete="off" placeholder="Search food — biryani, kabiraji, Mitra Cafe…" aria-label="Search food">
+                  </div>
+                  <div class="chip-row scroll" id="food-cats" aria-label="Food categories"></div>
+                  <div class="row between">
+                    <div class="row">
+                      <button class="chip" id="food-picks" type="button" aria-pressed="false">★ Pujo picks</button>
+                      <button class="chip" id="food-nochain" type="button" aria-pressed="false">Hide chains</button>
+                    </div>
+                    <select class="input" id="food-sort" aria-label="Sort food" style="width:auto;padding:7px 10px;font-size:13px">
+                      <option value="map">Near map centre</option>
+                      <option value="me">Nearest to me</option>
+                      <option value="picks">Pujo picks first</option>
+                      <option value="az">A – Z</option>
+                    </select>
+                  </div>
+                  <div class="result-meta" id="food-meta"></div>
+                </div>
+                <div class="f-list" id="food-list" style="padding-top:12px"></div>
+              </section>
+
+            </div>
+          </aside>
+
+          <div class="map-wrap">
+            <div id="map" role="application" aria-label="Map of pandals, food and Metro"></div>
+            <div class="map-ui">
+              <div class="chip-row">
+                <button class="chip" id="lyr-pandals" type="button" aria-pressed="true"><span class="dot" style="color:#ffb020"></span>Pandals</button>
+                <button class="chip" id="lyr-food" type="button" aria-pressed="false"><span class="dot" style="color:#34d6c0"></span>Food</button>
+                <button class="chip" id="lyr-metro" type="button" aria-pressed="true"><span class="dot" style="color:#2f6bff"></span>Metro</button>
+              </div>
+              <button class="icon-btn" id="btn-locate" type="button" title="Show my location" aria-label="Show my location"><svg><use href="#i-locate"/></svg></button>
+            </div>
+            <div class="map-legend" id="map-legend">
+              <span><i style="background:#ff7a1a;box-shadow:0 0 8px #ff7a1a"></i>Busy pandal</span>
+              <span><i style="background:#34d6c0"></i>Calmer pandal</span>
+              <span><i style="background:#34d6c0;border-radius:3px;width:8px;height:8px"></i>Food</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="calendar">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Durga Puja 2026 · Kolkata</div>
+            <h2>The days &amp; the Metro <span class="bn-accent">পাঁজি</span></h2>
+          </div>
+          <p>Shashthi tithi spans two days this year, so the big nights are Saturday 17 to Tuesday 20 October. Blue and Green Lines run through the night on those four nights.</p>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+        <div class="metro-table-wrap">
+          <table class="metro" id="metro-table" aria-label="Kolkata Metro Puja timings 2026"></table>
+        </div>
+        <p class="fine" id="metro-note"></p>
+      </div>
+    </section>
+
+    <div class="lp-divider" aria-hidden="true"></div>
+
+    <section class="section" id="tips">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Field notes</div>
+            <h2>Survive (and enjoy) the crowds <span class="bn-accent">টিপস</span></h2>
+          </div>
+          <p>Kolkata gets tens of lakhs of visitors on Ashtami night. A little strategy turns a queue marathon into a great night.</p>
+        </div>
+        <div class="tips-grid">
+          <article class="tip"><div class="ico">🌅</div><h3>Beat the queues</h3><p>Mega pandals like Sreebhumi, Santosh Mitra Square and Suruchi are calmest before noon and after 2 am. Panchami and Shashthi afternoons are gold.</p></article>
+          <article class="tip"><div class="ico">🚇</div><h3>Ride the all-night Metro</h3><p>Blue and Green Lines run through the night 17–20 Oct. The Orange Line is suspended 17–21 Oct. The planner already knows this.</p></article>
+          <article class="tip"><div class="ico">👟</div><h3>Dress for 15,000 steps</h3><p>Comfortable shoes, light cotton, a power bank, water and small cash for phuchka. Barricades and one-way flows can double walking distance.</p></article>
+          <article class="tip"><div class="ico">🍛</div><h3>Eat off-peak</h3><p>Arsalan, Peter Cat and Golbari see long waits after 8 pm. Eat around 6 pm or snack on rolls and phuchka between pandals.</p></article>
+          <article class="tip"><div class="ico">📶</div><h3>Save it offline</h3><p>Networks jam in crowds. Once loaded, this site keeps working offline — optimise your route at home and screenshot or print the timeline.</p></article>
+          <article class="tip"><div class="ico">🧭</div><h3>Pick a meeting point</h3><p>Agree on a landmark — a Metro gate or a sweet shop — in case your group gets separated in the crush.</p></article>
+          <article class="tip"><div class="ico">🪔</div><h3>Don't skip the bonedi baris</h3><p>Family pujas like Shobhabazar Rajbari (since 1757) and Sabarna Roy Choudhury (since 1610) are calm, old and beautiful.</p></article>
+          <article class="tip"><div class="ico">🆘</div><h3>Emergencies</h3><p>Dial <b>112</b> for any emergency, <b>100</b> for police, <b>101</b> for fire. Kolkata Police help kiosks sit near most big pandals.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="live">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Ratings, straight from Google</div>
+            <h2>How Google ratings work here</h2>
+          </div>
+        </div>
+        <div class="live-grid">
+          <div class="live-card">
+            <h3>Works out of the box</h3>
+            <p class="muted">Every food spot has a <b>★ Google rating</b> button that opens Google's own place card — live rating, review count, photos and hours. Every pandal page also has a <b>live Google food map</b> showing every restaurant around it. Nothing is cached or copied, so ratings are always current.</p>
+            <h3 style="margin-top:18px">Want ratings inside the lists?</h3>
+            <p class="muted">Connect your own Google Maps Platform key to see ratings, review counts, price level and opening status directly in every list — and let the planner choose food stops by rating.</p>
+            <ol>
+              <li>In <a href="https://console.cloud.google.com/google/maps-apis/start" target="_blank" rel="noopener">Google Cloud Console</a>, enable <b>Maps JavaScript API</b> and <b>Places API (New)</b>.</li>
+              <li>Create an API key and restrict it to your site (e.g. <code>https://YOUR-NAME.github.io/*</code>).</li>
+              <li>Paste it here — it's stored only in this browser. Site owners can also set it in <code>config.js</code>.</li>
+            </ol>
+            <div class="key-row">
+              <input class="input" id="key-input" type="password" autocomplete="off" spellcheck="false" placeholder="AIza…" aria-label="Google Maps Platform API key">
+              <button class="btn btn-primary btn-sm" id="key-save" type="button"><svg width="16" height="16"><use href="#i-key"/></svg>Connect</button>
+              <button class="btn btn-ghost btn-sm" id="key-remove" type="button">Remove</button>
+            </div>
+            <div class="status-line" id="key-status"></div>
+          </div>
+          <div class="live-card">
+            <h3>What you get with a key</h3>
+            <ul class="muted" style="padding-left:18px;margin:8px 0 0">
+              <li>Top-rated places within walking distance of every pandal, live from Google.</li>
+              <li>Rating ★, number of reviews, price level and "open now".</li>
+              <li>Official website and Google Maps listing (with menu photos) for each place.</li>
+              <li>Food stops in your route picked by rating, cravings and detour time.</li>
+            </ul>
+            <p class="fine">Google's free monthly usage is plenty for personal planning. Set a daily quota on the key if you publish the site. Results are shown with Google attribution and are not stored.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot-grid">
+      <div>
+        <h4>Pujo Parikrama 2026</h4>
+        <p>An independent, non-commercial guide for Durga Puja in Kolkata. Pandal list curated from public sources; venue anchors from OpenStreetMap; food spots from editorial picks plus OpenStreetMap. Ratings are shown live by Google and never stored. Queue, walking, Metro and cab times are estimates — barricades and one-way systems change daily, so follow police and volunteer instructions.</p>
+        <p>Not affiliated with any puja committee, Google or Metro Railway Kolkata. Missing a pandal? Use <b>“Add a pandal that isn't listed”</b> at the bottom of the Pandals list — it's saved in your browser and works in your plans.</p>
+      </div>
+      <div>
+        <h4>Sources</h4>
+        <ul id="sources-list"></ul>
+        <p style="margin-top:10px">Map tiles &amp; data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors · Maps by <a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>.</p>
+        <p>Data last updated <span id="data-updated"></span>.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script src="data/meta.js"></script>
+  <script src="data/metro.js"></script>
+  <script src="data/pandals.js"></script>
+  <script src="data/food.js"></script>
+  <script src="assets/vendor/leaflet/leaflet.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/transit.js"></script>
+  <script src="assets/js/planner.js"></script>
+  <script src="assets/js/google.js"></script>
+  <script src="assets/js/art.js"></script>
+  <script src="assets/js/ui-state.js"></script>
+  <script src="assets/js/ui-map.js"></script>
+  <script src="assets/js/ui-pandals.js"></script>
+  <script src="assets/js/ui-plan.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

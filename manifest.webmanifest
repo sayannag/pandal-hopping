@@ -1,0 +1,13 @@
+{
+  "name": "Pujo Parikrama 2026 — Kolkata pandals + food planner",
+  "short_name": "Pujo Parikrama",
+  "description": "Every big Kolkata Durga Puja pandal of 2026 on one map, food around each one with live Google ratings, and a pandal-hopping route optimiser.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#12070a",
+  "theme_color": "#12070a",
+  "icons": [
+    { "src": "assets/img/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
